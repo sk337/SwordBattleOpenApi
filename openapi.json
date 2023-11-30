@@ -1,0 +1,102 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Swordbattle.io Api Docs",
+    "version": "latest",
+    "license": {
+      "name": "GPL",
+      "url": "LICENSE"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://swordbattle.io/api/"
+    }
+  ],
+  "paths": {
+    "/buy": {
+      "post": {
+        "description": "Buy a Cosmetic",
+        "operationId": "buyCosmetic",
+        "tags": [
+          "Cosmetics"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "secret": {
+                    "type": "string"
+                  },
+                  "item": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "secret",
+                  "item"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Item Bought",
+            "plain/text": {
+              "schema": {
+                "exmaple":"any"
+              }
+            }
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    },
+    "equip": {
+      "post":{
+        "description": "Equip a Cosmetic",
+        "operationId": "equipCosmetic",
+        "tags": [
+          "Cosmetics"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "secret": {
+                    "type": "string"
+                  },
+                  "item": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "secret",
+                  "item"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Item Equiped",
+            "plain/text": {
+              "schema": {
+                "exmaple":"any"
+              }
+            }
+          },
+          "400": {
+            "description": "Error"
+          }
+        }
+      }
+    }
+  }
+}

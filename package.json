@@ -1,0 +1,17 @@
+{
+  "name": "swordbattleopenapi",
+  "version": "1.0.0",
+  "description": "OpenApi Specs for SwordBattle.io",
+  "main": "index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist && mkdir dist",
+    "build": "npx @redocly/cli build-docs openapi.json -o dist/index.html",
+    "postbuild": "cp LICENSE dist/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "@redocly/cli": "^1.5.0"
+  }
+}

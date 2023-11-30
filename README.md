@@ -1,2 +1,3 @@
 # SwordBattleOpenApi
-OpenApi Specs for SwordBattle.io
+
+> OpenApi Specs for SwordBattle.io
