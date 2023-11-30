@@ -5,7 +5,8 @@
     "version": "latest",
     "license": {
       "name": "GPL v3.0",
-      "url": "LICENSE"
+      "url": "LICENSE",
+      "identifier": "AGPL-3.0-or-later"
     }
   },
   "servers": [
