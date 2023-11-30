@@ -18,7 +18,7 @@ cp openapi.json dist/
 cp LICENSE dist/
 
 echo "patching dist/swagger-initializer.js"
-sed -i -e "s/url: \"https:\/\/petstore.swagger.io\/v2\/swagger.json\"/urls: [{url: \`$\{location.href\}\/openapi.json\`, name:\"SwordBattle.io\"}]/g" dist/swagger-initializer.js
+sed -i -e "s/url: \"https:\/\/petstore.swagger.io\/v2\/swagger.json\"/urls: [{url: \`$\{location.href\}openapi.json\`, name:\"SwordBattle.io\"}]/g" dist/swagger-initializer.js
 
 echo "cleaning"
 
