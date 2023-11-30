@@ -5,7 +5,6 @@
     "version": "latest",
     "license": {
       "name": "GPL v3.0",
-      "url": "LICENSE",
       "identifier": "AGPL-3.0-or-later"
     }
   },
@@ -223,6 +222,16 @@
               }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "Success full username change",
+            "content": {
+              "text/plain": {
+                "example": "Success"
+              }
+            }
+          }
         }
       }
     },
@@ -254,6 +263,20 @@
                   }
                 },
                 "required": ["username", "password", "captcha"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Account Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "secret": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }
