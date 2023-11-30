@@ -152,10 +152,12 @@
                     "type": "string"
                   },
                   "oldPass": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "password"
                   },
                   "newpass": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "password"
                   }
                 },
                 "required": ["oldPass", "newpass", "secret"]
@@ -239,13 +241,15 @@
                     "type":"string"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "password"
                   },
                   "captcha": {
                     "type": "string"
                   },
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "format": "email"
                   }
                 },
                 "required": ["username", "password", "captcha"]
@@ -282,6 +286,45 @@
             "content":{
               "application/json": {
                 "schema":{
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post":{
+        "description": "Login to an account",
+        "operationId": "login",
+        "tags": ["Account"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string",
+                    "format": "password"
+                  },
+                  "captcha": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Log in good",
+            "content": {
+              "application/json": {
+                "schema": {
                   "$ref": "#/components/schemas/user"
                 }
               }
