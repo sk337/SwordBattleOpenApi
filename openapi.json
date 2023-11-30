@@ -4,7 +4,7 @@
     "title": "Swordbattle.io Api Docs",
     "version": "latest",
     "license": {
-      "name": "GPL",
+      "name": "GPL v3.0",
       "url": "LICENSE"
     }
   },
@@ -13,14 +13,52 @@
       "url": "https://swordbattle.io/api/"
     }
   ],
+  "components": {
+    "schemas": {
+      "user":{
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "format": "password"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "skins":{
+            "type":"object"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "lastusernamechange": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "secret":{
+            "type": "string",
+            "format": "uuidv4"
+          },
+          "coins": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  },
   "paths": {
     "/buy": {
       "post": {
         "description": "Buy a Cosmetic",
         "operationId": "buyCosmetic",
-        "tags": [
-          "Cosmetics"
-        ],
+        "tags": ["Cosmetics"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -33,10 +71,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "secret",
-                  "item"
-                ]
+                "required": ["secret", "item"]
               }
             }
           }
@@ -44,25 +79,28 @@
         "responses": {
           "200": {
             "description": "Item Bought",
-            "plain/text": {
-              "schema": {
-                "exmaple":"any"
+            "content": {
+              "text/plain": {
+                "example": "Succuess"
               }
             }
           },
           "400": {
-            "description": "Error"
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "example": "Invalid Secret"
+              }
+            }
           }
         }
       }
     },
-    "equip": {
-      "post":{
+    "/equip": {
+      "post": {
         "description": "Equip a Cosmetic",
         "operationId": "equipCosmetic",
-        "tags": [
-          "Cosmetics"
-        ],
+        "tags": ["Cosmetics"],
         "requestBody": {
           "content": {
             "application/json": {
@@ -75,10 +113,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "secret",
-                  "item"
-                ]
+                "required": ["secret", "item"]
               }
             }
           }
@@ -86,14 +121,171 @@
         "responses": {
           "200": {
             "description": "Item Equiped",
-            "plain/text": {
-              "schema": {
-                "exmaple":"any"
+            "content": {
+              "text/plain": {
+                "example": "Success"
               }
             }
           },
           "400": {
-            "description": "Error"
+            "description": "Error",
+            "content": {
+              "text/plain": {
+                "example": "Item not found"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/changepassword": {
+      "post": {
+        "description": "Change Account Password",
+        "operationId": "changePassword",
+        "tags": ["Account"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "secret": {
+                    "type": "string"
+                  },
+                  "oldPass": {
+                    "type": "string"
+                  },
+                  "newpass": {
+                    "type": "string"
+                  }
+                },
+                "required": ["oldPass", "newpass", "secret"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password Changed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "secret": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "examples": ["Invalid secret", "Invalid password", "Missing fields"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/changeusername": {
+      "post": {
+        "description": "Change account Username",
+        "operationId": "changeUsername",
+        "tags": ["Account"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "secret": {
+                    "type": "string"
+                  },
+                  "username": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "secret"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/signup": {
+      "post": {
+        "description": "Create an account",
+        "operationId": "createAccount",
+        "tags": [
+          "Account"
+        ],
+        "requestBody": {
+          "content":{
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "username": {
+                    "type":"string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "captcha": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": ["username", "password", "captcha"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/loginsecret": {
+      "post":{
+        "description": "Login with secret",
+        "operationId": "secretLogin",
+        "tags": ["Account"],
+        "requestBody":{
+          "content":{
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "secret": {
+                    "type":"string"
+                  },
+                  "captcha": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Logged in",
+            "content":{
+              "application/json": {
+                "schema":{
+                  "$ref": "#/components/schemas/user"
+                }
+              }
+            }
           }
         }
       }
