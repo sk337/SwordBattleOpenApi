@@ -27,9 +27,7 @@ jobs:
       - name: Build
         env:
           PRODUCTION: true
-        run: |
-          npm install
-          bash build.mjs
+        run: bash build.sh
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
